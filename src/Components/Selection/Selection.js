@@ -51,9 +51,17 @@ export default function Selection({ reference }) {
             removeFromSelection: removeFromSelection,
         }}>
             <div className={styles.selection}>
-                <div ref={reference}>
-                    <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
-                    <button onClick={handleSearch}>Search</button>
+                <div ref={reference} className={styles.searchbox}>
+                    <input
+                        type="text"
+                        value={query} 
+                        onChange={e => setQuery(e.target.value)}
+                        onKeyPress={e => {
+                            if (e.key === "Enter") handleSearch()
+                        }}
+                        className={styles.searchbar}
+                    />
+                    <button onClick={handleSearch} className={styles.button}>Search</button>
                 </div>
                 <div>
                     {selection.map(e => (
@@ -62,7 +70,7 @@ export default function Selection({ reference }) {
                         </div>
                     ))}
                 </div>
-                <div className={styles.grid}>
+                <div className={styles.flexbox}>
                     {movies.map((movie) => (
                         <Movie
                             title={movie.Title}
@@ -72,7 +80,11 @@ export default function Selection({ reference }) {
                         />
                     ))}
                 </div>
-                {movies.length !== 0 && <button onClick={() => fetchMovies(false)}>Load more</button>}
+                {movies.length !== 0 &&
+                    <button onClick={() => fetchMovies(false)} className={[styles.button, styles.more].join(" ")}>
+                        Load more
+                    </button>
+                }
             </div>
         </Selected.Provider>
     )

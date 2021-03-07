@@ -1,6 +1,18 @@
 .movie {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: solid 2px lightgray;
     border-radius: 8px;
     margin: 8px;
     text-align: center;
+    width: 300px;
+    background-color: white;
+}
+
+.poster {
+    clip: rect(0, 150px, 400px, 0px);
+}
+
+.title {
 }

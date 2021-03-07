@@ -19,7 +19,7 @@ export default function Movie(props) {
 
     return (
         <div className={styles.movie} onClick={handleSelection}>
-            <img src={props.poster} alt={`Poster for ${props.title}`} />
+            <img src={props.poster} alt={`Poster for ${props.title}`} className={styles.poster} />
             <p>{props.title}</p>
         </div>
     )
