@@ -6,7 +6,7 @@ import styles from './Movie.module.css'
 export default function Movie(props) {
     const { selection, addToSelection, removeFromSelection } = useContext(Selected)
 
-    const isSelected = ( selection.find(e => e.poster === props.poster))
+    const isSelected = ( selection.find(e => e.imdbID === props.id))
 
     const handleSelection = (e) => {
         e.preventDefault()

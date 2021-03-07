@@ -8,3 +8,12 @@
     text-align: center;
     background-color: lightseagreen;
 }
+
+.button { 
+    background-color: #0020C2;
+    color: white;
+    font-size: large;
+    padding: 8px;
+    border-color: #0020C2;
+    min-width: 300px;
+}

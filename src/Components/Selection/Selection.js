@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Movie from '../Movie/Movie'
 import styles from './Selection.module.css'
 import Selected from '../../Context/Selected/Selected'
+import MovieList from '../MovieList/MovieList'
 
 export default function Selection({ reference }) {
     const [query, setQuery] = useState("")
@@ -24,20 +24,20 @@ export default function Selection({ reference }) {
             })
     }
 
-    const addToSelection = (title, poster, id) => {
+    const addToSelection = (Title, Poster, imdbID) => {
         if (selection.length >= 3) {
             alert("You can't choose more than 3 movies")
             return;
         }
         if (selection.length === 0) {
-            setSelection([{ title, poster, id }])
+            setSelection([{ Title, Poster, imdbID }])
         } else {
-            setSelection([...selection, { title, poster, id }])
+            setSelection([...selection, { Title, Poster, imdbID }])
         }
     }
 
-    const removeFromSelection = (title, poster, id) => {
-        setSelection(selection.filter(movie => movie.title !== title && movie.poster !== poster && movie.id !== id))
+    const removeFromSelection = (Title, Poster, imdbID) => {
+        setSelection(selection.filter(movie => movie.Title !== Title && movie.Poster !== Poster && movie.imdbID !== imdbID))
     }
 
     const handleSearch = () => {
@@ -51,10 +51,13 @@ export default function Selection({ reference }) {
             removeFromSelection: removeFromSelection,
         }}>
             <div className={styles.selection}>
+
+                <MovieList movies={selection} />
+
                 <div ref={reference} className={styles.searchbox}>
                     <input
                         type="text"
-                        value={query} 
+                        value={query}
                         onChange={e => setQuery(e.target.value)}
                         onKeyPress={e => {
                             if (e.key === "Enter") handleSearch()
@@ -63,25 +66,14 @@ export default function Selection({ reference }) {
                     />
                     <button onClick={handleSearch} className={styles.button}>Search</button>
                 </div>
-                <div>
-                    {selection.map(e => (
-                        <div>
-                            {e.title}
-                        </div>
-                    ))}
-                </div>
-                <div className={styles.flexbox}>
-                    {movies.map((movie) => (
-                        <Movie
-                            title={movie.Title}
-                            poster={movie.Poster}
-                            id={movie.imdbID}
-                            key={movie.imdbID}
-                        />
-                    ))}
-                </div>
+
+                <MovieList movies={movies} />
+
                 {movies.length !== 0 &&
-                    <button onClick={() => fetchMovies(false)} className={[styles.button, styles.more].join(" ")}>
+                    <button
+                        onClick={() => fetchMovies(false)}
+                        className={[styles.button, styles.more].join(" ")}
+                    >
                         Load more
                     </button>
                 }

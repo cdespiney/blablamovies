@@ -19,7 +19,7 @@ export default function Landing(props) {
                     Results next week!
                 </div>
             </div>
-            <button onClick={props.clicked}>Select now</button>
+            <button onClick={props.clicked} className={styles.button}>Start choosing!</button>
         </div>
     )
 }

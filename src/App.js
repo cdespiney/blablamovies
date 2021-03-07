@@ -6,7 +6,11 @@ import Selection from './Components/Selection/Selection'
 function App() {
     const sel = useRef();
 
-    const scrollToSel = (ref) => window.scrollTo(0, ref.current.offsetTop)
+    const scrollToSel = (ref) => window.scrollTo({
+        left: 0,
+        top: ref.current.offsetTop,
+        behavior: 'smooth'
+    })
 
     return (
         <div className="App">

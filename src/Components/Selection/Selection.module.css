@@ -6,11 +6,6 @@
     background-color: whitesmoke;
 }
 
-.flexbox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
 
 .button { 
     background-color: #0020C2;
@@ -30,7 +25,6 @@
 }
 
 .searchbar {
-    width: 300px;
     font-size: large;
     padding: 8px;
 }
