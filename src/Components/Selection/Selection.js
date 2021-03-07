@@ -10,7 +10,7 @@ export default function Selection({ reference, scroll }) {
     const [selection, setSelection] = useState([])
 
     const fetchMovies = (clear) => {
-        fetch(`http://www.omdbapi.com/?s=${query}&apikey=d579f432${(pagination !== 0 && !clear) ? `&page=${pagination}` : ''}`)
+        fetch(`https://www.omdbapi.com/?s=${query}&apikey=d579f432${(pagination !== 0 && !clear) ? `&page=${pagination}` : ''}`)
             .then(response => response.json())
             .then(data => {
                 if (data.Response === "True") {
