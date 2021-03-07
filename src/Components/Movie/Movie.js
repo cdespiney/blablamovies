@@ -19,7 +19,7 @@ export default function Movie(props) {
 
     return (
         <div className={styles.movie} onClick={handleSelection}>
-            <img src={props.poster} alt={`Poster for ${props.title}`} className={styles.poster} />
+            <img src={(props.poster !== "N/A" ? props.poster : `https://place-hold.it/300x450/ffffff/000000&text=N\\A&fontsize=36`)} alt={`Poster for ${props.title}`} className={styles.poster} />
             <p>{props.title}</p>
         </div>
     )
