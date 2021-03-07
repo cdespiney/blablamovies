@@ -50,11 +50,15 @@ export default function Selection({ reference }) {
             addToSelection: addToSelection,
             removeFromSelection: removeFromSelection,
         }}>
-            <div className={styles.selection}>
+            <div className={styles.selection} ref={reference}>
 
-                <MovieList movies={selection} />
+                {selection.length !== 0 && <div>
+                    <h2>You have chosen:</h2>
+                    <MovieList movies={selection} />
+                    <button className={[styles.button, styles.more].join(" ")}>Vote!</button>
+                </div>}
 
-                <div ref={reference} className={styles.searchbox}>
+                <div className={styles.searchbox}>
                     <input
                         type="text"
                         value={query}
