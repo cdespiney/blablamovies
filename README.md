@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Blablamovie
+
+This small website is a small React demonstration, hosted on [https://cdespiney-blablamovies.netlify.app/](https://cdespiney-blablamovies.netlify.app/)
+
+This project was done on 03/07/2021.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
