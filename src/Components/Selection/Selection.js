@@ -3,10 +3,10 @@ import Movie from '../Movie/Movie'
 import styles from './Selection.module.css'
 import Selected from '../../Context/Selected/Selected'
 
-export default function Selection({reference}) {
+export default function Selection({ reference }) {
     const [query, setQuery] = useState("")
     const [movies, setMovies] = useState([])
-    const [pagination, setPagination] = useState(0)
+    const [pagination, setPagination] = useState(1)
     const [selection, setSelection] = useState([])
 
     const fetchMovies = (clear) => {
@@ -14,7 +14,7 @@ export default function Selection({reference}) {
             .then(response => response.json())
             .then(data => {
                 if (data.Response === "True") {
-                    setPagination((!clear ? pagination + 1 : 1))
+                    setPagination((!clear ? pagination + 1 : 2))
                     if (clear) {
                         setMovies([...data.Search])
                     } else {
@@ -24,20 +24,20 @@ export default function Selection({reference}) {
             })
     }
 
-    const addToSelection = (title, poster) => {
+    const addToSelection = (title, poster, id) => {
         if (selection.length >= 3) {
             alert("You can't choose more than 3 movies")
             return;
         }
         if (selection.length === 0) {
-            setSelection([{title, poster}])
+            setSelection([{ title, poster, id }])
         } else {
-            setSelection([...selection, { title, poster }])
+            setSelection([...selection, { title, poster, id }])
         }
     }
 
-    const removeFromSelection = (title, poster) => {
-        setSelection(selection.filter(movie => movie.title !== title && movie.poster !== poster))
+    const removeFromSelection = (title, poster, id) => {
+        setSelection(selection.filter(movie => movie.title !== title && movie.poster !== poster && movie.id !== id))
     }
 
     const handleSearch = () => {
@@ -50,27 +50,30 @@ export default function Selection({reference}) {
             addToSelection: addToSelection,
             removeFromSelection: removeFromSelection,
         }}>
-            <div ref={reference}>
-                <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
-                <button onClick={handleSearch}>Search</button>
-            </div>
-            <div>
-                {selection.map(e => (
-                    <div>
-                        {e.title}
-                    </div>
-                ))}
-            </div>
             <div className={styles.selection}>
-                {movies.map((movie) => (
-                    <Movie
-                        title={movie.Title}
-                        poster={movie.Poster}
-                        key={movie.imdbID}
-                    />
-                ))}
+                <div ref={reference}>
+                    <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
+                    <button onClick={handleSearch}>Search</button>
+                </div>
+                <div>
+                    {selection.map(e => (
+                        <div>
+                            {e.title}
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.grid}>
+                    {movies.map((movie) => (
+                        <Movie
+                            title={movie.Title}
+                            poster={movie.Poster}
+                            id={movie.imdbID}
+                            key={movie.imdbID}
+                        />
+                    ))}
+                </div>
+                {movies.length !== 0 && <button onClick={() => fetchMovies(false)}>Load more</button>}
             </div>
-            {movies.length !== 0 && <button onClick={() => fetchMovies(false)}>Load more</button>}
         </Selected.Provider>
     )
 }

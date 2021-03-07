@@ -11,9 +11,9 @@ export default function Movie(props) {
     const handleSelection = (e) => {
         e.preventDefault()
         if (!isSelected) {
-            addToSelection(props.title, props.poster)
+            addToSelection(props.title, props.poster, props.id)
         } else {
-            removeFromSelection(props.title, props.poster)
+            removeFromSelection(props.title, props.poster, props.id)
         }
     }
 
