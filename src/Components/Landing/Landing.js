@@ -10,10 +10,16 @@ export default function Landing(props) {
                     Blablamovie
                 </h1>
                 <div>
-                    Select your favorite pirate movie!
+                    What are the best movies ever?
+                </div>
+                <div>
+                    Vote! You can select up to 3 movies!
+                </div>
+                <div>
+                    Results next week!
                 </div>
             </div>
-            <button onClick={() => {}}>Select now</button>
+            <button onClick={props.clicked}>Select now</button>
         </div>
     )
 }

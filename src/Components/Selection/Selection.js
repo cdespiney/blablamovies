@@ -3,7 +3,7 @@ import Movie from '../Movie/Movie'
 import styles from './Selection.module.css'
 import Selected from '../../Context/Selected/Selected'
 
-export default function Selection() {
+export default function Selection({reference}) {
     const [query, setQuery] = useState("")
     const [movies, setMovies] = useState([])
     const [pagination, setPagination] = useState(0)
@@ -30,9 +30,10 @@ export default function Selection() {
             return;
         }
         if (selection.length === 0) {
-            setSelection([title, poster])
+            setSelection([{title, poster}])
+        } else {
+            setSelection([...selection, { title, poster }])
         }
-        setSelection([...selection, { title, poster }])
     }
 
     const removeFromSelection = (title, poster) => {
@@ -49,7 +50,7 @@ export default function Selection() {
             addToSelection: addToSelection,
             removeFromSelection: removeFromSelection,
         }}>
-            <div>
+            <div ref={reference}>
                 <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
                 <button onClick={handleSearch}>Search</button>
             </div>
