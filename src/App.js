@@ -16,7 +16,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <Landing clicked={() => scrollToSel(sel)}/>
-                <Selection reference={sel} />
+                <Selection reference={sel} scroll={() => scrollToSel(sel)} />
             </header>
         </div>
     );

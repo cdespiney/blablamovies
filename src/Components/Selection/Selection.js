@@ -3,7 +3,7 @@ import styles from './Selection.module.css'
 import Selected from '../../Context/Selected/Selected'
 import MovieList from '../MovieList/MovieList'
 
-export default function Selection({ reference }) {
+export default function Selection({ reference, scroll }) {
     const [query, setQuery] = useState("")
     const [movies, setMovies] = useState([])
     const [pagination, setPagination] = useState(1)
@@ -31,6 +31,7 @@ export default function Selection({ reference }) {
         }
         if (selection.length === 0) {
             setSelection([{ Title, Poster, imdbID }])
+            scroll()
         } else {
             setSelection([...selection, { Title, Poster, imdbID }])
         }
@@ -44,6 +45,11 @@ export default function Selection({ reference }) {
         fetchMovies(true)
     }
 
+    const handleVote = () => {
+        alert("Thanks for participating!")
+        // post to API here
+    }
+
     return (
         <Selected.Provider value={{
             selection: selection,
@@ -55,7 +61,7 @@ export default function Selection({ reference }) {
                 {selection.length !== 0 && <div>
                     <h2>You have chosen:</h2>
                     <MovieList movies={selection} />
-                    <button className={[styles.button, styles.more].join(" ")}>Vote!</button>
+                    <button className={[styles.button, styles.more].join(" ")} onClick={handleVote}>Vote!</button>
                 </div>}
 
                 <div className={styles.searchbox}>
