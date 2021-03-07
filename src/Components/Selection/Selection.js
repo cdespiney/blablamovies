@@ -14,7 +14,7 @@ export default function Selection() {
             .then(response => response.json())
             .then(data => {
                 if (data.Response === "True") {
-                    setPagination(pagination + 1)
+                    setPagination((!clear ? pagination + 1 : 1))
                     if (clear) {
                         setMovies([...data.Search])
                     } else {
@@ -40,7 +40,6 @@ export default function Selection() {
     }
 
     const handleSearch = () => {
-        setPagination(0)
         fetchMovies(true)
     }
 
